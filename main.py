@@ -42,7 +42,10 @@ def scrapping():
         # Now add a submit button to the form:
         submitted = form.form_submit_button("Scraper")
         if submitted:
-            st.dataframe(BeautifuCollecte_url(url,n))
+            data = BeautifuCollecte_url(url,n)
+            r = resume_dataset(data,"Données")
+            st.write(f"Votre dataset a {r["nbr_lignes"]} lignes {r["nbr_colonnes"]} colonnes et {r["nbr_nan"]} valeurs manquantes.")
+            st.dataframe(data)
 
 
 
@@ -150,6 +153,7 @@ def loadding(dataframe,titre,key):
     if st.button(titre,key):
         st.header(f"{titre}")
         st.write(f"{dataframe.shape[0]} lignes et {dataframe.shape[1]} colonnes.")
+        
         
         st.dataframe(dataframe)  
         
